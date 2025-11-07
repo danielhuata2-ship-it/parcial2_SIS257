@@ -16,4 +16,6 @@ export interface Programa {
   fechaInicio: Date
 
   estado: string
+
+  area_conocimiento: string
 }

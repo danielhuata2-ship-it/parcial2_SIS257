@@ -49,7 +49,11 @@ defineExpose({ obtenerLista })
     <div class="col-7 pl-0 mt-3">
       <InputGroup>
         <InputGroupAddon><i class="pi pi-search"></i></InputGroupAddon>
-        <InputText v-model="busqueda" type="text" placeholder="Buscar por nombre o descripción" />
+        <InputText
+          v-model="busqueda"
+          type="text"
+          placeholder="Buscar por nombre o descripción o area de conocimiento"
+        />
       </InputGroup>
     </div>
 
@@ -64,6 +68,7 @@ defineExpose({ obtenerLista })
           <th>Costo</th>
           <th>Fecha Inicio</th>
           <th>Estado</th>
+          <th>Area Conocimiento</th>
           <th>Acciones</th>
         </tr>
       </thead>
@@ -77,6 +82,7 @@ defineExpose({ obtenerLista })
           <td>{{ programa.costo }}</td>
           <td>{{ new Date(programa.fechaInicio).toLocaleDateString() }}</td>
           <td>{{ programa.estado }}</td>
+          <td>{{ programa.area_conocimiento }}</td>
           <td>
             <Button icon="pi pi-pencil" aria-label="Editar" text @click="emitirEdicion(programa)" />
             <Button

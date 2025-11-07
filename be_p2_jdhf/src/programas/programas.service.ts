@@ -33,6 +33,7 @@ export class ProgramasService {
         costo: true,
         fechaInicio: true,
         estado: true,
+        area_conocimiento: true,
         nivelAcademico: { id: true, nombre: true },
       },
       order: {nombre: 'ASC'},

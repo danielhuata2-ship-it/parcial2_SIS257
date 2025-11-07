@@ -1,6 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsDateString, IsDefined, IsEnum, IsInt, IsNotEmpty, IsNumber, IsString, MaxLength, Min } from "class-validator";
-import { Transform } from "class-transformer";
+import { Transform, Type } from "class-transformer";
 
 export class CreateProgramaDto {
     @ApiProperty()
@@ -37,6 +37,7 @@ export class CreateProgramaDto {
     @ApiProperty()
     @IsDefined({ message: 'El campo costo debe estar definido' })
     @IsNumber({ maxDecimalPlaces: 5 }, { message: 'El campo costo debe ser numérico con máximo cinco decimales' })
+    @Type(() => Number)
     @Min(0, { message: 'El campo costo no puede ser negativo' })
     costo: number;
 
@@ -50,4 +51,11 @@ export class CreateProgramaDto {
     @IsString({ message: 'El campo estado debe ser de tipo cadena' })
     @IsEnum(['En Planificación', 'En curso', 'Finalizado'])
     estado: string;
+
+    @ApiProperty()
+    @IsNotEmpty({ message: 'El campo area conocimiento no debe estar vacío' })
+    @IsString({ message: 'El campo area conocimiento debe ser de tip cadena' })
+    @MaxLength(100, { message: 'El campo area conocimiento no debe exceder los 1000 caracteres' })
+    @Transform(({ value }): string | undefined => (typeof value === 'string' ? value.trim() : value))
+    area_conocimiento:string 
 }

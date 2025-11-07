@@ -33,6 +33,13 @@ const opcionesEstado = ref([
   { label: 'Finalizado', value: 'Finalizado' },
 ])
 
+const opcionesAreaConocimiento = ref([
+  { label: 'Derecho', value: 'Derecho' },
+  { label: 'Ingenieria', value: 'Ingeniería' },
+  { label: 'Economia', value: 'Economía' },
+  { label: 'Salud', value: 'Salud' },
+])
+
 async function obtenerNiveles() {
   niveles.value = await http.get('niveles-academicos').then((response) => response.data)
 }
@@ -48,6 +55,7 @@ async function handleSave() {
       costo: programa.value.costo,
       fechaInicio: programa.value.fechaInicio,
       estado: programa.value.estado,
+      area_conocimiento: programa.value.area_conocimiento,
     }
     if (props.modoEdicion) {
       await http.patch(`${ENDPOINT}/${programa.value.id}`, body)
@@ -165,6 +173,18 @@ watch(
           id="estado"
           v-model="programa.estado"
           :options="opcionesEstado"
+          option-label="label"
+          option-value="value"
+          class="flex-auto"
+        />
+      </div>
+      <!-- Nuevo bloque agregado para areaConocimiento -->
+      <div class="flex items-center gap-4 mb-4">
+        <label for="areaConocimiento" class="font-semibold w-3">Área de Conocimiento</label>
+        <Dropdown
+          id="areaConocimiento"
+          v-model="programa.area_conocimiento"
+          :options="opcionesAreaConocimiento"
           option-label="label"
           option-value="value"
           class="flex-auto"

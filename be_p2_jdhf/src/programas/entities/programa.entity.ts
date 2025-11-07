@@ -31,6 +31,9 @@ export class Programa {
     @Column('varchar', { length: 20 })
     estado:string;
 
+    @Column('varchar', { length: 100, nullable: true })
+    area_conocimiento:string;
+
     @CreateDateColumn({ name: 'fecha_creacion' })
     fechaCreacion: Date;
 
